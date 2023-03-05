@@ -50,6 +50,37 @@
             android:textColor="@color/black"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_kelvinCelsius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/gray"
+            android:textColor="@color/black"
+            android:text="@string/button_kelvinCelsius"/>
+        <Button
+            android:id="@+id/button_kelvinFahrenheit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/gray"
+            android:textColor="@color/black"
+            android:layout_weight="2.8"
+            android:text="@string/button_kelvinFahrenheit"/>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textview_value_converted"
         android:layout_width="match_parent"

@@ -16,10 +16,18 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     private final double TRINTA_DOIS = 32;
     private final double UM_PONTO_OITO = 1.8;
 
+    private final double DOIS_SETE_TRES = 273;
+
+    private final double NOVE = 9;
+
     private EditText tempEditText;
     private Button converterCelsiusButton;
 
     private Button converterFahrenheitButton;
+
+    private Button converterKelvinFahrenheitButton;
+
+    private Button converterKelvinCelsiusButton;
     private TextView saidaValueTextView;
 
     @Override
@@ -35,6 +43,13 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         converterFahrenheitButton = findViewById(R.id.button_para_fahrenheit);
         converterFahrenheitButton.setOnClickListener(this);
+
+        converterKelvinFahrenheitButton = findViewById(R.id.button_kelvinFahrenheit);
+        converterKelvinFahrenheitButton.setOnClickListener(this);
+
+        converterKelvinCelsiusButton = findViewById(R.id.button_kelvinCelsius);
+        converterKelvinCelsiusButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -51,6 +66,18 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             tempSaida = getFahreheintConvertion(tempEntrada);
 
             saidaValueTextView.setText(String.format("%.2f°C = %.2f°F", tempEntrada, tempSaida));
+        }
+        if(view == converterKelvinFahrenheitButton){
+            tempEntrada = getTemp();
+            tempSaida = getFahrenheitParaKelvin(tempEntrada);
+
+            saidaValueTextView.setText(String.format("%.2f°F = %.2f°K", tempEntrada, tempSaida));
+        }
+        if(view == converterKelvinCelsiusButton){
+            tempEntrada = getTemp();
+            tempSaida = getCelsiusParaKelvin(tempEntrada);
+
+            saidaValueTextView.setText(String.format("%.2f°C = %.2f°K", tempEntrada, tempSaida));
         }
     }
 
@@ -69,6 +96,20 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         double F = (C * UM_PONTO_OITO) + TRINTA_DOIS;
 
         return F;
+    }
+
+    private double getFahrenheitParaKelvin(double F){
+
+        double K = (5 *(F - TRINTA_DOIS) / NOVE)  + DOIS_SETE_TRES;
+
+        return K;
+    }
+
+    private double getCelsiusParaKelvin(double C){
+
+        double K = C  + DOIS_SETE_TRES;
+
+        return K;
     }
 
     private double getTemp(){
