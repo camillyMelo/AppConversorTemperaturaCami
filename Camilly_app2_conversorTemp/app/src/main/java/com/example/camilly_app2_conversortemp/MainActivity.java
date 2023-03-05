@@ -1,4 +1,6 @@
 package com.example.camilly_app2_conversortemp;
+package com.example.conversortempcamilly;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     private EditText tempEditText;
     private Button converterCelsiusButton;
+
+    private Button converterFahrenheitButton;
     private TextView saidaValueTextView;
 
     @Override
@@ -28,22 +32,25 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         converterCelsiusButton = findViewById(R.id.button_celsius);
         converterCelsiusButton.setOnClickListener(this);
+
+        converterFahrenheitButton = findViewById(R.id.button_para_fahrenheit);
+        converterFahrenheitButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        double tempEntrada, tempSaida = 0;
         if(view == converterCelsiusButton){
-            double tempF;
-            try{
-                tempF = Double.valueOf(tempEditText.getText().toString());
-            }catch (NumberFormatException nfe){
-                tempF = 0;
-                mensagem("Temperatura de entrada inválida!");
-            }catch (Exception e){
-                tempF = 0;
-                mensagem("Erro na entrada de dados!");
-            }
-            saidaValueTextView.setText(String.format("%.2f°F = %.2f°C",tempF, getCelsiusConvertion(tempF)));
+            tempEntrada = getTemp();
+            tempSaida = getCelsiusConvertion(tempEntrada);
+
+            saidaValueTextView.setText(String.format("%.2f°F = %.2f°C",tempEntrada, getCelsiusConvertion(tempEntrada)));
+        }
+        if(view == converterFahrenheitButton){
+            tempEntrada = getTemp();
+            tempSaida = getFahreheintConvertion(tempEntrada);
+
+            saidaValueTextView.setText(String.format("%.2f°C = %.2f°F", tempEntrada, tempSaida));
         }
     }
 
@@ -56,5 +63,25 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         double C = (F - TRINTA_DOIS) /  UM_PONTO_OITO;
 
         return C;
+    }
+    private double getFahreheintConvertion(double C){
+
+        double F = (C * UM_PONTO_OITO) + TRINTA_DOIS;
+
+        return F;
+    }
+
+    private double getTemp(){
+        double t;
+        try{
+            t = Double.valueOf(tempEditText.getText().toString());
+        }catch (NumberFormatException nfe){
+            t = 0;
+            mensagem(getString(R.string.temperatura_invalida));
+        }catch (Exception e){
+            t= 0;
+            mensagem(getString(R.string.erro_entrada));
+        }
+        return t;
     }
 }
